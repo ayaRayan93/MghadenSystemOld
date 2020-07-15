@@ -80,6 +80,7 @@ namespace MainSystem
                 checkBoxNormal_Increase.Checked = true;
                 checkBoxCategorical_Increase.Checked = true;
                 load = true;
+
             }
             catch (Exception ex)
             {
@@ -329,6 +330,7 @@ namespace MainSystem
                             for (int i = 0; i < gridView1.SelectedRowsCount; i++)
                             {
                                 DataRowView row = (DataRowView)(((GridView)gridControl1.MainView).GetRow(((GridView)gridControl1.MainView).GetSelectedRows()[i]));
+                               gridControl1.MainView.GetRow(((GridView)gridControl1.MainView).GetSelectedRows()[i]);
 
                                 additionalIncreaseSellPrice(Convert.ToInt32(row[0].ToString()));
                                 String query = "update sellprice set Sell_Discount=@Sell_Discount,Normal_Increase=@Normal_Increase,Categorical_Increase=@Categorical_Increase,Price_Type=@Price_Type,Sell_Price=@Sell_Price,ProfitRatio=@ProfitRatio,Price=@Price,PercentageDelegate=@PercentageDelegate,Date=@Date,OfferFlag=@OfferFlag where SellPrice_ID=" + row[0].ToString();
@@ -353,7 +355,7 @@ namespace MainSystem
                                     command.Parameters["?OfferFlag"].Value = 0;
                                 }
                                 command.ExecuteNonQuery();
-
+               
                                 UserControl.ItemRecord("sellprice", "تعديل", Convert.ToInt32(row[0].ToString()), DateTime.Now, "", dbconnection);
 
                                 //insert into Archif Table
@@ -643,7 +645,7 @@ namespace MainSystem
                                 }
                                 command.ExecuteNonQuery();
 
-
+                                
                                 UserControl.ItemRecord("sellprice", "تعديل", Convert.ToInt32(row[0].ToString()), DateTime.Now, "", dbconnection);
 
                                 //insert into Archif table

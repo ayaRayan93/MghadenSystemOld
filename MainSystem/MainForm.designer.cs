@@ -852,6 +852,7 @@
             this.tcMainContent.Name = "tcMainContent";
             this.tcMainContent.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.tcMainContent.Padding = new System.Windows.Forms.Padding(30);
+            this.tcMainContent.Position = 83;
             this.tcMainContent.Size = new System.Drawing.Size(1001, 705);
             this.tcMainContent.TabIndex = 0;
             this.tcMainContent.Text = "tileControl1";
@@ -6403,7 +6404,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(167, 24);
             this.label1.TabIndex = 1;
-            this.label1.Text = "المركز التجاري للسيراميك";
+            this.label1.Text = "المركز التجاري المجاهدين";
             // 
             // contextMenuStrip1
             // 
