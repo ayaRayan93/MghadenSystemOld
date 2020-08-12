@@ -1279,14 +1279,14 @@ namespace MainSystem
                             query = "insert into groupo (Group_Name,Factory_ID,Type_ID) values (@name,@Factory_ID,@Type_ID)";
                             com = new MySqlCommand(query, dbconnection);
                             com.Parameters.AddWithValue("@name", txtGroup.Text);
-                            if (comType.SelectedValue.ToString() == "2")
-                            {
-                                com.Parameters.AddWithValue("@Factory_ID", -1);
-                            }
-                            else
-                            {
+                            //if (comType.SelectedValue.ToString() == "2")
+                            //{
+                            //    com.Parameters.AddWithValue("@Factory_ID", -1);
+                            //}
+                            //else
+                            //{
                                 com.Parameters.AddWithValue("@Factory_ID", -Convert.ToInt32(comType.SelectedValue));
-                            }
+                            //}
                             com.Parameters.AddWithValue("@Type_ID", Convert.ToInt32(comType.SelectedValue));
                             com.ExecuteNonQuery();
                             displayGroup(-Convert.ToInt32(comType.SelectedValue));
@@ -1357,14 +1357,14 @@ namespace MainSystem
                                     query = "insert into groupo (Group_Name,Factory_ID,Type_ID) values (@name,@Factory_ID,@Type_ID)";
                                     com = new MySqlCommand(query, dbconnection);
                                     com.Parameters.AddWithValue("@name", txtGroup.Text);
-                                    if (comType.SelectedValue.ToString() == "2")
-                                    {
-                                        com.Parameters.AddWithValue("@Factory_ID", -1);
-                                    }
-                                    else
-                                    {
+                                    //if (comType.SelectedValue.ToString() == "2")
+                                    //{
+                                    //    com.Parameters.AddWithValue("@Factory_ID", -1);
+                                    //}
+                                    //else
+                                    //{
                                         com.Parameters.AddWithValue("@Factory_ID", -Convert.ToInt32(comType.SelectedValue));
-                                    }
+                                   // }
                                     com.Parameters.AddWithValue("@Type_ID", Convert.ToInt32(comType.SelectedValue));
                                     com.ExecuteNonQuery();
                                     displayGroup(-Convert.ToInt32(comType.SelectedValue));
@@ -1513,14 +1513,14 @@ namespace MainSystem
                             query = "update  groupo set Group_Name=@Group_Name,Factory_ID=@Factory_ID,Type_ID=@Type_ID where Group_ID="+ groupUpdateId;
                             com = new MySqlCommand(query, dbconnection);
                             com.Parameters.AddWithValue("@Group_Name", txtGroup.Text);
-                            if (comType.SelectedValue.ToString() == "2")
-                            {
-                                com.Parameters.AddWithValue("@Factory_ID", -1);
-                            }
-                            else
-                            {
+                            //if (comType.SelectedValue.ToString() == "2")
+                            //{
+                            //    com.Parameters.AddWithValue("@Factory_ID", -1);
+                            //}
+                            //else
+                            //{
                                 com.Parameters.AddWithValue("@Factory_ID", -Convert.ToInt32(comType.SelectedValue));
-                            }
+                            //}
                             com.Parameters.AddWithValue("@Type_ID", comType.SelectedValue);
                             com.ExecuteNonQuery();
                             displayGroup(-(int)comType.SelectedValue);
@@ -1626,7 +1626,7 @@ namespace MainSystem
                 if (row1 != null)
                 {
                     int id = Convert.ToInt32(row1.Cells[0].Value.ToString());
-                    if (!producItemUsed("Product_ID", id))
+                    if (!producItemUsed("Group_ID", id))
                     {
                         DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete the item?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (dialogResult == DialogResult.Yes)
@@ -2034,14 +2034,14 @@ namespace MainSystem
                     int TypeCoding_Method = (int)com.ExecuteScalar();
                     if (TypeCoding_Method==1)
                     {
-                        if (comTypeProduct.SelectedValue.ToString() == "2" || comTypeProduct.SelectedValue.ToString() == "1")
-                        {
-                            query = "select distinct groupo.Group_ID, Group_Name from groupo  where Factory_ID=-1";
-                        }
-                        else
-                        {
+                        //if (comTypeProduct.SelectedValue.ToString() == "2" || comTypeProduct.SelectedValue.ToString() == "1")
+                        //{
+                        //    query = "select distinct groupo.Group_ID, Group_Name from groupo  where Factory_ID=-1";
+                        //}
+                        //else
+                        //{
                             query = "select distinct groupo.Group_ID, Group_Name from groupo  where Type_ID=" + comTypeProduct.SelectedValue + " and Factory_ID=" + -(int)comTypeProduct.SelectedValue;
-                        }
+                     //   }
 
                         com = new MySqlCommand(query, dbconnection);
                         MySqlDataReader dr = com.ExecuteReader();
@@ -3171,8 +3171,8 @@ namespace MainSystem
         public void displayGroup_Type(int type_id)
         {
             string query = "select distinct Group_ID as 'كود',Group_Name as 'المجموعة' from groupo left join factory on factory.Factory_ID=groupo.Factory_ID  where groupo.Type_ID=" + type_id + " order by Group_ID";
-            if (type_id==2|| type_id==1)
-                 query = "select distinct Group_ID as 'كود',Group_Name as 'المجموعة' from groupo left join factory on factory.Factory_ID=groupo.Factory_ID  where groupo.Factory_ID=" + -1 + " order by Group_ID";
+            //if (type_id==2|| type_id==1)
+            //     query = "select distinct Group_ID as 'كود',Group_Name as 'المجموعة' from groupo left join factory on factory.Factory_ID=groupo.Factory_ID  where groupo.Factory_ID=" + -1 + " order by Group_ID";
 
             MySqlDataAdapter da = new MySqlDataAdapter(query, dbconnection);
             DataTable dt = new DataTable();
@@ -3194,9 +3194,9 @@ namespace MainSystem
         public void displayGroup(int id)
         {
             string query = "";
-            if (txtType1.Text=="2"|| txtType1.Text == "1")
-              query = "select distinct Group_ID as 'كود',Group_Name as 'المجموعة' from groupo   where  groupo.Factory_ID=-1 order by Group_ID";
-            else
+            //if (txtType1.Text=="2"|| txtType1.Text == "1")
+            //  query = "select distinct Group_ID as 'كود',Group_Name as 'المجموعة' from groupo   where  groupo.Factory_ID=-1 order by Group_ID";
+            //else
                 query = "select distinct Group_ID as 'كود',Group_Name as 'المجموعة' from groupo   where groupo.Type_ID=" + txtType1.Text + " and groupo.Factory_ID=" + id + " order by Group_ID";
             MySqlDataAdapter da = new MySqlDataAdapter(query, dbconnection);
             DataTable dt = new DataTable();
@@ -3340,14 +3340,14 @@ namespace MainSystem
             {
                 if (dr[0].ToString() == "1")
                 {
-                    if (dr[1].ToString() == "1" || dr[1].ToString() == "2")
-                    {
-                        ids.Add(-1);
-                    }
-                    else
-                    {
+                    //if (dr[1].ToString() == "1" || dr[1].ToString() == "2")
+                    //{
+                    //    ids.Add(-1);
+                    //}
+                    //else
+                    //{
                         ids.Add(-Convert.ToInt32(dr[1].ToString()));
-                    }
+                    //}
                 }
                 else
                 {

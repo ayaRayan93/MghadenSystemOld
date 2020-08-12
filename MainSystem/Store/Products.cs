@@ -975,9 +975,9 @@ namespace MainSystem
             if (TypeCoding_Method == 1)
             {
                 string query2 = "";
-                if (txtType.Text=="2"|| txtType.Text == "1")
-                    query2 = "select * from groupo where Factory_ID="+-1 ;
-                else
+                //if (txtType.Text=="2"|| txtType.Text == "1")
+                //    query2 = "select * from groupo where Factory_ID="+-1 ;
+                //else
                     query2 = "select * from groupo where Factory_ID=" + -Convert.ToInt32(txtType.Text) + " and Type_ID=" + txtType.Text;
 
                 MySqlDataAdapter da2 = new MySqlDataAdapter(query2, dbconnection);
@@ -1141,6 +1141,7 @@ namespace MainSystem
             return flag;
            
         }
+
         public bool producItemUsed(string columnName,int ProductItem_ID)
         {
             string query = "select Data_ID from data "+columnName+"="+ ProductItem_ID+" limit 1";
